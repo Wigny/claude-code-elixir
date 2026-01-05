@@ -14,11 +14,7 @@ fi
 
 if [[ "$file_path" == *.ex || "$file_path" == *.exs ]]; then
   if [ -f "$file_path" ]; then
-    if output=$(mix format "$file_path" 2>&1); then
-      echo "Formatted: $file_path"
-    else
-      echo "Format warning: $output" >&2
-    fi
+    mix format "$file_path" || exit 2
   fi
 fi
 

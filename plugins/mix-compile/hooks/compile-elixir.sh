@@ -20,13 +20,7 @@ if [[ "$file_path" == *.ex ]]; then
     while [[ "$dir" != "/" ]]; do
       if [[ -f "$dir/mix.exs" ]]; then
         cd "$dir"
-        if output=$(mix compile --warnings-as-errors 2>&1); then
-          echo "Compiled successfully"
-        else
-          echo "Compilation error:"
-          echo "$output"
-          exit 1
-        fi
+        mix compile --warnings-as-errors || exit 2
         break
       fi
       dir=$(dirname "$dir")

@@ -25,13 +25,7 @@ if [[ "$file_path" == *.ex || "$file_path" == *.exs ]]; then
           # Credo not installed, skip check silently
           exit 0
         fi
-        if output=$(mix credo "$file_path" 2>&1); then
-          echo "Credo passed: $file_path"
-        else
-          echo "Credo issues found:"
-          echo "$output"
-          exit 1
-        fi
+        mix credo "$file_path" >&2 || exit 2
         break
       fi
       dir=$(dirname "$dir")
